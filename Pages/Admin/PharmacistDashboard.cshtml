@@ -1,0 +1,266 @@
+﻿@page
+@model BookListRazor.Pages.Admin.PharmacistDashboardModel
+@{
+}
+<head>
+    <title>@ViewData["Title"] - Pharmacy Management</title>
+</head>
+<style>
+    body {
+        background-color: rgb(242,242,242);
+        overflow-x:hidden;
+    }
+
+    .header {
+        justify-content: start;
+    }
+</style>
+
+<div class="header">
+    <p>MediTech</p>
+    <a asp-page="/Index">Log Out</a>
+</div>
+
+<div id="table-popup" class="popup">
+    <p>Are you sure you want to delete <span id="productName"></span>?</p>
+    <form method ="post">
+        <input type="hidden" name="Action" value="delete" />
+        <input type="hidden" name="IdInput"/>
+        <div class="delete-buttons">
+            <button type="submit">Yes</button>
+            <button type="button" onclick="closePopup()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.errorMessage))
+{
+    <p class="error-message">@Model.errorMessage</p>
+}
+
+<div class="dashboard-container">
+    <div class="chats-add-edit">
+        <div class="chat-container">
+            <div class="chat-list" style="display:@(Model.ShowChat ? "none" : "flex")">
+                <p class="chat-list-heading">Chats</p>
+                <div class="chats">
+                    @foreach (var user in Model.UsersWithMessages)
+                    {
+                        <div class="chat-user">
+                            <a onclick="Scroll()" asp-page-handler="LoadUserMessages" asp-route-id="@user.UserId" class="chat-user-a">
+                                <div class="chat-info">
+                                    <p class="chat-username">@user.Username</p>
+                                    @if (user.UnreadCount > 0)
+                                    {
+                                        <p class="chat-unread">@user.UnreadCount unread</p>
+                                    }
+                                    <p class="chat-date">@user.LastMessageDate.ToString("g")</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="chat-ph" style="display:@(Model.ShowChat ? "flex" : "none")">
+                <div class="chat-header">
+                    <span class="chat-heading">Chat With Customer</span>
+                    <a class="X-ph" asp-page-handler="CloseChat">X</a>
+                </div>
+                <div class="chat-messages" id="chat-messages-ph">
+                    @if (Model.ChatMessages.Any())
+                    {
+                        foreach (var message in Model.ChatMessages)
+                        {
+                            if (message.UserId == message.CustomerId)
+                            {
+                                <div class="message-customer-container">
+                                    <div class="message-customer-name">Customer @message.User.Username</div>
+                                    <div class="message-customer-ph">@message.MessageText</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="message-pharmacist-ph">@message.MessageText</div>
+
+                            }
+                        }
+                    }
+
+                </div>
+                <div class="chat-input">
+                    <form method="post">
+                        <input type="hidden" name="SelectedUserId" value="@Model.SelectedUserId" />
+
+                        <input type="text" name="MessageInput" placeholder="Type a message..." />
+                        <button type="submit" onclick="Scroll()" asp-page-handler="SendMessage">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="discount-code-adder">
+            <form method="post">
+                <div class="div-generate">
+                    <label>New Code:</label>
+                    <input type="text" asp-for="GeneratedCode" id="generatedCode" readonly />
+                    <button type="button" onclick = "generateCode()">Generate Code</button>
+                </div>
+
+                <div class="div-discount">
+                    <label>Discount %:</label>
+                    <input type="number" asp-for="DiscountPercent" required min="1" max="100" />
+                </div>
+
+                <div class="div-save">
+                    <button type="submit" asp-page-handler="SaveCode">Save</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="add-edit">
+            <div class="add-window">
+                <div class="title">Add New Product</div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="inputset">
+                        <input type="hidden" name="Action" value="add" />
+                        <input type="text" placeholder="Enter Label" name="Label" required />
+                        <input type="number" step="0.01" placeholder="Enter Price" name="Price" required />
+                        <input type="text" placeholder="Enter Description" name="Description" />
+                        <select name="Type" required>
+                            <option value="" disabled selected>Choose type</option>
+                            <option value="depression">Depression</option>
+                            <option value="pain">Pain</option>
+                            <option value="head">Head</option>
+                            <option value="cold">Cold</option>
+                            <option value="digestion">Digestion</option>
+                            <option value="allergy">Allergy</option>
+                            <option value="skin">Skin</option>
+                            <option value="diabetes">Diabetes</option>
+                            <option value="heart">Heart</option>
+                            <option value="vitamins">Vitamins</option>
+                        </select>
+                    </div>
+                    <div class="inputset">
+
+                        <input type="file" accept=".png" class="fileInput" placeholder="Choose Image" name="Image" required />
+                        <input type="date" placeholder="Enter Expiration Date" name="ExpirationDate" required />
+                        <input type="number" placeholder="Enter Quantity" name="Quantity" required />
+                        <input type="submit" value="Add New Product" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="edit-window">
+                <div class="title">Edit Product</div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="inputset">
+                        <input type="hidden" name="IdInput" />
+                        <input type="hidden" name="Action" value="update" />
+                        <input type="text" placeholder="Enter Label" name="Label" required />
+                        <input type="number" step="0.01" placeholder="Enter Price" name="Price" required />
+                        <input type="text" placeholder="Enter Description" name="Description" />
+                        <select name="Type" required>
+                            <option value="" disabled selected>Choose type</option>
+                            <option value="depression">Depression</option>
+                            <option value="pain">Pain</option>
+                            <option value="head">Head</option>
+                            <option value="cold">Cold</option>
+                            <option value="digestion">Digestion</option>
+                            <option value="allergy">Allergy</option>
+                            <option value="skin">Skin</option>
+                            <option value="diabetes">Diabetes</option>
+                            <option value="heart">Heart</option>
+                            <option value="vitamins">Vitamins</option>
+                        </select>
+                    </div>
+                    <div class="inputset">
+                        <input type="file" accept=".png" class="fileInput" placeholder="Change Image" name="Image" />
+                        <input type="date" placeholder="Enter Expiration Date" name="ExpirationDate" required />
+                        <input type="number" placeholder="Enter Quantity" name="Quantity" required />
+                        <input type="submit" onclick="saveChanges()" value="Save Changes" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="filters-container">
+        <div class="sort-order">
+            <select name="Sort" class="sort" required>
+                <option value="" disabled selected>Sort by</option>
+                <option value="ExpirationDate">Expiration Date</option>
+                <option value="Quantity">Quantity</option>
+                <option value="Price">Price</option>
+                <option value="Name">Name</option>
+                <option value="Type">Type</option>
+            </select>
+            <select name="Order" class="order">
+                <option value="" disabled selected>Order</option>
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+            </select>
+        </div>
+        
+        
+        <select name="Filter" class="filter" required>
+            <option value="" disabled selected>Choose type</option>
+            <option value="all">All</option>
+            <option value="depression">Depression</option>
+            <option value="pain">Pain</option>
+            <option value="head">Head</option>
+            <option value="cold">Cold</option>
+            <option value="digestion">Digestion</option>
+            <option value="allergy">Allergy</option>
+            <option value="skin">Skin</option>
+            <option value="diabetes">Diabetes</option>
+            <option value="heart">Heart</option>
+            <option value="vitamins">Vitamins</option>
+        </select>
+    </div>
+    <div class="table-container">
+        <table class="table table-striped">
+            <thread>
+                <tr>
+                    <th>ProductId</th>
+                    <th>Label</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>ImagePath</th>
+                    <th>Expiration Date</th>
+                    <th>Quantity</th>
+                    <th>Manage Table</th>
+                </tr>
+            </thread>
+            <tbody>
+                @if (Model.Products != null && Model.Products.Any())
+                {
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr class="table-item">
+                            <td>@product.Id</td>
+                            <td class="table-label">@product.Label</td>
+                            <td>@product.Price</td>
+                            <td>@(string.IsNullOrEmpty(product.Description) ? "" : product.Description)</td>
+                            <td>@product.Type</td>
+                            <td>@product.Image</td>
+                            <td>@product.ExpirationDate.ToString("yyyy-MM-dd")</td>
+                            <td>@product.Quantity</td>
+                            <td>
+                                <button type="submit" onclick="editProduct(@product.Id, '@product.Label', @product.Price, '@product.Description', '@product.Type', '@product.ExpirationDate.ToString("yyyy-MM-dd")', @product.Quantity)">Edit</button>
+                                <button type="button" onclick="showPopup(this)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr colspan="9"><td>No products available.</td></tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="/js/PharmacistDashboard.js"></script>

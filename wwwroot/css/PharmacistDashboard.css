@@ -1,0 +1,538 @@
+﻿.dashboard-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: start;
+  align-items: center;
+  font-family: Kanit;
+}
+.chats-add-edit {
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex;
+  width: 90%;
+  height: 35%;
+  margin-bottom: 2%;
+}
+.chat-container {
+  position: relative;
+  height: 100%;
+  width: 25%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
+  box-shadow: 6px 7px 10px rgba(0, 0, 0, 0.6);
+}
+.chat-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 1000;
+  color: gray;
+}
+.chat-list-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 12%;
+  font-size: 20px;
+  color: gray;
+  background-color: rgb(252, 252, 252);
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: gray;
+}
+.chat-user {
+  width: 100%;
+  height: 25%;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: gray;
+}
+.chat-user-a {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: gray;
+}
+.chat-user-a:hover {
+  text-decoration: none;
+  color: gray;
+}
+.chat-info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.chats {
+  overflow-y: auto;
+  width: 100%;
+  height: 86%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.chat-ph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.X-ph {
+  height: 100%;
+  width: 15%;
+  text-decoration: none;
+  color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.X-ph:hover {
+  text-decoration: none;
+  color: gray;
+}
+.message-customer-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  margin: 2%;
+  align-self: flex-start;
+}
+.message-customer-name {
+  width: 100%;
+  color: gray;
+  text-align: start;
+}
+.message-customer-ph {
+  max-width: 70%;
+  background-color: rgb(167, 199, 231);
+  border-radius: 15px;
+  word-wrap: break-word;
+  padding: 1%;
+}
+.message-pharmacist-ph {
+  max-width: 70%;
+  margin-left: auto;
+  border-radius: 15px;
+  align-self: flex-end;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  background-color: rgb(100, 149, 237);
+  word-wrap: break-word;
+  padding: 1%;
+}
+
+.chat-username {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26%;
+  font-weight: bold;
+}
+.chat-unread {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  font-weight: bold;
+}
+.chat-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 43%;
+}
+
+.add-edit {
+  height: 100%;
+  width: 55%;
+  position: relative;
+  top: 0;
+  border-radius: 40px;
+  box-shadow: 6px 7px 10px rgba(0, 0, 0, 0.6);
+  background-color: rgb(250, 250, 250);
+}
+
+.add-window {
+  position: relative;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-window {
+  display: none;
+  position: relative;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.filters-container {
+  margin-bottom: 10px;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filters-container select {
+  margin-bottom: 15px;
+  color: gray;
+  background-color: rgb(250, 250, 250);
+  font-size: 20px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.sort-order {
+  width: 13%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sort {
+  width: 55% !important;
+}
+
+.order {
+  width: 44% !important;
+}
+
+.filter {
+  width: 13%;
+}
+
+.inputset {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputset input,
+.inputset select {
+  width: 80%;
+  background-color: rgb(250, 250, 250);
+  height: 15%;
+  border-radius: 20px;
+  font-size: 23px;
+  color: gray;
+  font-weight: 470;
+  padding-left: 3%;
+  border-style: solid;
+  border-color: gray;
+  border-width: 2px;
+  box-shadow:
+    inset 0 4px 2px rgba(255, 255, 255, 1),
+    2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.add-edit input[type="submit"] {
+  background-color: rgb(70, 130, 180);
+  color: rgb(242, 242, 242);
+}
+
+.table-container {
+  width: 95%;
+  font-size: 22px;
+}
+
+.add-edit form {
+  height: 75%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.title {
+  width: 100%;
+  height: 25%;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: gray;
+}
+
+.NoProductsMessage {
+  display: none;
+}
+
+.delete-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10%;
+}
+.delete-buttons button {
+  width: 40%;
+}
+.discount-code-adder {
+  width: 17%;
+  height: 100%;
+}
+.discount-code-adder form {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6%;
+  align-items: center;
+  color: gray;
+  border-width: 1px;
+  border-color: gray;
+  border-style: solid;
+  box-shadow: 6px 7px 10px rgba(0, 0, 0, 0.6);
+  padding: 6%;
+}
+.discount-code-adder form button {
+  background-color: rgb(70, 130, 180);
+  border-radius: 20px;
+  color: white;
+  font-size: 100%;
+  width: 100%;
+}
+.div-generate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5%;
+  width: 100%;
+  height: 40%;
+  align-items: center;
+}
+.div-generate input {
+  border-radius: 20px;
+  border-color: gray;
+  width: 100%;
+}
+
+.div-discount {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 6%;
+}
+.div-discount input {
+  color: gray;
+}
+.div-save {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 1700px) {
+  .chat-date {
+    font-size: 15px;
+  }
+  .chat-username {
+    font-size: 15px;
+  }
+  .chat-unread {
+    font-size: 15px;
+  }
+  .table {
+    font-size: 17px;
+  }
+  .inputset input {
+    font-size: 15px;
+  }
+  .inputset select {
+    font-size: 15px;
+  }
+  .discount-code-adder {
+    font-size: 15px;
+  }
+}
+@media (max-width: 1500px) {
+  .chat-heading {
+    font-size: 15px;
+  }
+  .chat-messages {
+    font-size: 15px;
+  }
+  .chat-input {
+    font-size: 15px;
+  }
+  .table {
+    font-size: 15px;
+  }
+  .title {
+    font-size: 25px;
+  }
+
+  .chat-date {
+    font-size: 12px;
+  }
+
+  .chat-username {
+    font-size: 12px;
+  }
+
+  .chat-unread {
+    font-size: 12px;
+  }
+
+  .inputset input {
+    font-size: 13px;
+  }
+
+  .inputset select {
+    font-size: 13px;
+  }
+
+  .discount-code-adder {
+    font-size: 12px;
+  }
+
+  .filters-container select {
+    font-size: 14px;
+  }
+}
+@media (max-width: 1100px) {
+  .add-edit form {
+    height: 90%;
+    padding-bottom: 5px;
+  }
+  .discount-code-adder form {
+    padding: 1%;
+  }
+  .chat-list-heading {
+    font-size: 12px;
+  }
+  .title {
+    font-size: 14px;
+  }
+  .chat-date {
+    font-size: 11px;
+  }
+
+  .chat-username {
+    font-size: 11px;
+  }
+  .chat-unread {
+    font-size: 11px;
+  }
+
+  .table {
+    font-size: 13px;
+  }
+
+  .inputset input {
+    font-size: 12px;
+  }
+  .inputset select {
+    font-size: 12px;
+  }
+
+  .discount-code-adder {
+    font-size: 12px;
+  }
+  .filters-container select {
+    font-size: 12px;
+  }
+}
+@media (max-width: 500px) {
+  .X-ph {
+    font-size: 6px;
+  }
+  .table {
+    font-size: 7px;
+  }
+  .sort-order select {
+    height: 25px;
+    font-size: 10px;
+  }
+  .filters container {
+    margin-bottom: 5px;
+    height: 25px;
+  }
+  .filters-container select {
+    font-size: 10px;
+    height: 25px;
+  }
+  .chat-date {
+    font-size: 7px;
+  }
+
+  .chat-username {
+    font-size: 7px;
+  }
+
+  .chat-unread {
+    font-size: 7px;
+  }
+  .chat-list-heading {
+    font-size: 10px;
+  }
+  .discount-code-adder {
+    font-size: 7px;
+  }
+  .title {
+    font-size: 12px;
+  }
+  .inputset input {
+    font-size: 7px;
+  }
+  .chat-heading {
+    font-size: 6px;
+  }
+
+  .chat-messages {
+    font-size: 6px;
+  }
+
+  .chat-input {
+    font-size: 6px;
+  }
+}

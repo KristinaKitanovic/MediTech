@@ -1,0 +1,47 @@
+﻿@page
+@model BookListRazor.Pages.Account.CustomerLoginModel
+@{
+}
+<head>
+    <title>@ViewData["Title"] - Customer Login</title>
+</head>
+
+
+    
+<div class="container">
+    <div class="main-window">
+        <div class="sticker-container">
+            <img class="sticker" src="/images/stiker-removebg-preview.png" />
+        </div>
+        <div class="register">
+            <p class="question">Don't have an account?</p>
+            <a class="register-button" asp-page="CustomerRegistration">Create An Account</a>
+        </div>
+        <div class="panel">
+            <form method="post">
+                <p class="heading">Customer Login</p>
+                <div class="field">
+                    <p class="tekst">Username</p>
+                    <input type="text" name="Username" placeholder="Enter Username" class="input" required />
+                </div>
+                <div class="field">
+                    <p class="tekst">Email</p>
+                    <input type="email" name="Email" placeholder="Enter Email" class="input" required />
+                </div>
+                <div class="field">
+                    <p class="tekst">Password</p>
+                    <input type="password" name="UserPassword" placeholder="Enter Password" required class="input" />
+                </div>
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <p class="error-message">@Model.ErrorMessage</p>
+                }
+                <input type="submit" id="login-button" value="Login" class="login-button" />
+            </form>
+        </div>
+   </div>
+</div>
+
+
+<script src="/js/JavaScript.js"></script>
+

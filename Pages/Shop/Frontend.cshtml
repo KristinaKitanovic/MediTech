@@ -1,0 +1,134 @@
+﻿@page
+@model BookListRazor.Pages.Shop.FrontendModel
+@{
+}
+<head>
+    <title>@ViewData["Title"] - MediTech Online Shop</title>
+</head>
+
+<style>
+    body {
+        background-color: rgb(242,242,242);
+    }
+</style>
+
+<div class="header">
+    <p class="name">MediTech</p>
+    <a asp-page="/Index">Log Out</a>
+    <input type="text" class="searchbox" placeholder="Search for products"/>
+    <a class="cart-picture" asp-page="Cart">
+        <img src="/images/shoppingcart.png" />
+    </a>
+</div>
+
+<div class="sidebar">
+    <div class="logo">
+        <img src="/images/logo.png" />
+    </div>
+    <button class="chat-button" onclick="ShowChat()">Chat With Pharmacist</button>
+    <div class="product-types">
+        <p>Categories</p>
+        <div>
+            <a href="#" onclick="filterProducts('all')">All Products</a>
+            <a href="#" onclick="filterProducts('depression')">Antidepressants</a>
+            <a href="#" onclick="filterProducts('pain')">Pain Relief</a>
+            <a href="#" onclick="filterProducts('head')">Headache & Migraine</a>
+            <a href="#" onclick="filterProducts('cold')">Cold & Flu</a>
+            <a href="#" onclick="filterProducts('digestion')">Digestive Health</a>
+            <a href="#" onclick="filterProducts('allergy')">Allergy Relief </a>
+            <a href="#" onclick="filterProducts('skin')"> Skin Care</a>
+            <a href="#" onclick="filterProducts('diabetes')">Diabetes Care</a>
+            <a href="#" onclick="filterProducts('heart')">Heart Health</a>
+            <a href="#" onclick="filterProducts('vitamins')">Vitamins & Supplements</a>
+        </div>
+    </div>
+</div>
+
+<div class="chat" style="display:@(Model.ShowChat ? "flex":"none")">
+    <div class="chat-header">
+        <span class="chat-heading">Chat With Pharmacist</span>
+        <a class="X" onclick="CloseChat()" asp-page-handler="CloseChat">X</a>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        @if (Model.ChatMessages.Any())
+        {
+            foreach (var message in Model.ChatMessages)
+            {
+                if (message.UserId == message.CustomerId)
+                {
+                    <div class="message-user">
+                        @message.MessageText
+                    </div>
+                }
+                else
+                {
+                    <div class="message-pharmacist-container">
+                        <div class="message-pharmacist-name">Pharmacist @message.User.Username</div>
+                        <div class="message-pharmacist">@message.MessageText</div>
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="chat-input">
+        <form method="post">
+            <input type="text" name="MessageInput" placeholder="Type a message..." />
+            <button type="submit" asp-page-handler="SendMessage">Send</button>
+        </form>
+    </div>
+</div>
+
+<div id="quantityPopup" class="popup" style="display: @(Model.ShowPopup ? "block" : "none")">
+    <form method="post">
+        <p>Enter Quantity for <span id="productName">@Model.ProductName</span>:</p>
+        <div class="quantity-controls">
+            <button type="button" id="decrease-button">−</button>
+            <input type="number" name="Quantity" value="1" min="1">
+            <button type="button" id="increase-button">+</button>
+        </div>
+        @if (!string.IsNullOrEmpty(Model.errorMessage))
+        {
+            <p class="error-msg">@Model.errorMessage</p>
+        }
+        <input type="hidden" name="ProductId" value="@Model.ProductId" />
+        <div class="confirm-cancel">
+            <button type="submit" id="confirm-button" asp-page-handler="ConfirmQuantity">Confirm</button>
+            <button type="button" id="cancel-button" asp-page-handler="Cancel">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<div class="content">
+    <section class="add-container">
+        <div class="slider-wrapper">
+            <div class="slider">
+                <img id="slide-1" src="/images/adds/slide1.png" />
+                <img id="slide-2" src="/images/adds/slide2.png" />
+                <img id="slide-3" src="/images/adds/slide3.png" />
+            </div>
+            <div class="slider-nav">
+                <a href="#slide-1"></a>
+                <a href="#slide-2"></a>
+                <a href="#slide-3"></a>
+            </div>
+        </div>
+    </section>
+    <div class="grid">
+        @foreach (var product in Model.Products)
+        {
+            <div class="item" data-type="@product.Type" data-id="@product.Id">
+                <div class="picture-container">
+                    <img src="@product.Image" class="product-image" />
+                </div>
+                <div class="name-price">
+                    <p class="label">@product.Label</p>
+                    <p class="price">@product.Price $</p>
+                </div>
+
+                <button class="addtocart-button" onclick="showPopup(this)">Add To Cart</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="/js/Shopping.js"></script>

@@ -1,0 +1,259 @@
+﻿.welcome-container {
+  background-color: rgb(242, 242, 242);
+  border-radius: 20px;
+  position: fixed;
+  top: 3%;
+  left: 10%;
+  width: 80%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: -5%;
+  box-shadow:
+    inset 0 10px 10px rgba(255, 255, 255, 1),
+    9px 9px 9px rgba(0, 0, 0, 0.6);
+}
+
+.welcome {
+  font-weight: bold;
+  font-size: 65px;
+  text-align: center;
+  color: gray;
+  margin-top: -2%;
+  margin-bottom: 0;
+}
+.welcome-logo {
+  width: 30%;
+  height: 40%;
+  display: block;
+}
+.welcome-logo img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.logins {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 35%;
+  width: 100%;
+}
+.customer-login,
+.pharmacist-login {
+  background-color: rgb(250, 250, 250);
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2%;
+  border-radius: 20px;
+  box-shadow:
+    inset 0 6px 6px rgba(255, 255, 255, 1),
+    5px 5px 5px rgba(0, 0, 0, 0.6);
+  transition:
+    0.3s ease,
+    transform 0.3s ease;
+}
+.customer-login:hover,
+.pharmacist-login:hover {
+  transform: scale(1.1);
+  box-shadow:
+    inset 0 4px 2px rgba(255, 255, 255, 1),
+    7px 7px 7px rgba(0, 0, 0, 0.8);
+}
+.customer-login p,
+.pharmacist-login p {
+  color: gray;
+  text-align: center;
+}
+.customer-login a,
+.pharmacist-login a {
+  color: rgb(242, 242, 242);
+  text-align: center;
+  background-color: rgb(70, 130, 180);
+  border-radius: 20px;
+  height: 30%;
+  width: 80%;
+  box-shadow:
+    inset 0 4px 2px rgba(255, 255, 255, 1),
+    5px 5px 5px rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  padding-top: 1%;
+  font-weight: 700;
+  font-size: 100%;
+  padding-top: 10px;
+  transition:
+    0.3s ease,
+    transform 0.3s ease;
+  border: none;
+}
+.customer-login a:hover,
+.pharmacist-login a:hover {
+  transform: scale(1.1);
+  box-shadow:
+    inset 0 4px 2px rgba(255, 255, 255, 1),
+    7px 7px 7px rgba(0, 0, 0, 0.8);
+}
+.summary {
+  color: gray;
+  margin-bottom: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 20px;
+  text-align: center;
+}
+.offers {
+  position: fixed;
+  bottom: 3%;
+  width: 80%;
+  left: 10%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offer1,
+.offer2,
+.offer3,
+.offer4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 23%;
+}
+
+.offer-pic-container {
+  width: 100%;
+  height: 70%;
+}
+
+.offer-pic-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow:
+    inset 0 4px 2px rgba(255, 255, 255, 1),
+    5px 5px 10px rgba(0, 0, 0, 0.6);
+}
+.offer2 div img {
+  object-position: 50% 10%;
+}
+.offer4 div img {
+  object-position: 50% 85%;
+}
+.offer1 p,
+.offer2 p,
+.offer3 p,
+.offer4 p {
+  text-align: center;
+  font-weight: bold;
+  color: gray;
+  font-size: 25px;
+}
+
+@media (max-width: 1600px) {
+  .welcome {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .welcome {
+    font-size: 35px;
+  }
+
+  .customer-login p,
+  .pharmacist-login p {
+    font-size: 14px;
+  }
+
+  .customer-login a,
+  .pharmacist-login a {
+    font-size: 14px;
+  }
+
+  .summary {
+    font-size: 14px;
+  }
+
+  .offer1 p,
+  .offer2 p,
+  .offer3 p,
+  .offer4 p {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 770px) {
+  .welcome {
+    font-size: 30px;
+  }
+
+  .customer-login p,
+  .pharmacist-login p {
+    font-size: 14px;
+  }
+
+  .customer-login a,
+  .pharmacist-login a {
+    font-size: 14px;
+  }
+
+  .summary {
+    font-size: 12px;
+  }
+
+  .offer1 p,
+  .offer2 p,
+  .offer3 p,
+  .offer4 p {
+    font-size: 15px;
+  }
+}
+@media (max-width: 500px) {
+  .welcome {
+    font-size: 15px;
+  }
+  .input {
+    font-size: 15px;
+  }
+  .register button {
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .customer-login p,
+  .pharmacist-login p {
+    font-size: 6px;
+  }
+
+  .customer-login a,
+  .pharmacist-login a {
+    font-size: 6px;
+  }
+
+  .summary {
+    font-size: 6px;
+  }
+
+  .offer1 p,
+  .offer2 p,
+  .offer3 p,
+  .offer4 p {
+    font-size: 6px;
+  }
+}

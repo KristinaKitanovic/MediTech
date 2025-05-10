@@ -1,0 +1,41 @@
+﻿@page
+@model BookListRazor.Pages.Account.CustomerRegistrationModel
+@{
+}
+<head>
+    <title>@ViewData["Title"] - Customer Registration</title>
+</head>
+
+<div class="container">
+    <div class="main-window">
+        <div class="sticker-container">
+            <img class="sticker" src="/images/stiker-removebg-preview.png" />
+        </div>
+        <p class="message">Thank you for choosing MediTech</p>
+        <div class="panel">
+            <form method="post">
+                <p class="heading">Create Customer Account</p>
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <p class="error-message">@Model.ErrorMessage</p>
+                }
+                <div class="field">
+                    <p class="tekst">Username</p>
+                    <input type="text" name="Username" placeholder="Enter Username" class="input" required />
+                </div>
+                <div class="field">
+                    <p class="tekst">Email</p>
+                    <input type="email" name="Email" placeholder="Enter Email" class="input" required />
+                </div>
+                <div class="field">
+                    <p class="tekst">Password</p>
+                    <input type="password" name="UserPassword" placeholder="Enter Password" required class="input" />
+                </div>
+                <input type="submit" id="register-button" value="Create" class="login-button" />
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/JavaScript.js"></script>

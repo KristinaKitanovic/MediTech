@@ -1,0 +1,71 @@
+﻿
+
+@page
+@model IndexModel
+
+<style>
+    body {
+        background-color: rgb(220,220,220);
+    }
+
+</style>
+
+<head>
+    <title>@ViewData["Title"] - Welcome To MediTech</title>
+</head>
+
+<div class="welcome-container">
+    <div class="welcome-logo">
+        <img src="/images/logo.png" />
+    </div>
+    <p class="welcome">Welcome To MediTech Pharmacy</p>
+    <p class="summary">MediTech is your trusted destination 
+        for high-quality pharmaceutical products and expert support. 
+        Our mission is to provide fast and reliable access to medications, 
+        with a focus on professionalism and caring for the health of our customers. 
+    </p>
+    <div class="logins">
+        <div class="customer-login">
+            <p>
+                Log in to manage your prescriptions
+                and easily access the medications you need, all tailored to you as a customer
+            </p>
+            <a asp-page="/Account/CustomerLogin">Customer Login</a>
+        </div>
+        <div class="pharmacist-login">
+            <p>
+                Log in to assist customers, manage prescriptions,
+                and provide expert care as a pharmacist
+            </p>
+            <a asp-page="/Account/PharmacistLogin">Pharmacist Login</a>
+        </div>
+    </div>
+     
+</div>
+
+<div class="offers">
+    <div class="offer1">
+        <div class="offer-pic-container">
+            <img src="/images/storage.jpg" />
+        </div>
+        <p>Large Amount Of Products</p>
+    </div>
+    <div class="offer2">
+        <div class="offer-pic-container">
+            <img src="/images/doctor.jpg" />
+        </div>
+        <p>Experts You Can Trust</p>
+    </div>
+    <div class="offer3">
+        <div class="offer-pic-container">
+            <img src="/images/slika1.jpg" />
+        </div>
+        <p>Innovative Technology</p>
+    </div>
+    <div class="offer4">
+        <div class="offer-pic-container">
+            <img src="/images/shipping.jpg" />
+        </div>
+        <p>Rapid & Reliable Shipping</p>
+    </div>
+</div>

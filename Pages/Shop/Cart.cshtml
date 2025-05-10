@@ -1,0 +1,76 @@
+﻿@page
+@model BookListRazor.Pages.Shop.CartModel
+@{
+}
+<head>
+    <title>@ViewData["Title"] - Your Cart</title>
+</head>
+<style>
+    body {
+        background-color: rgb(242,242,242);
+        
+    }
+
+    .header
+    {
+        justify-content:start;
+    }
+</style>
+
+<div class="popup" name="CheckoutPopup">
+    <form method="post" class="Checkout-form">
+        <input type="tel" name="PhoneNumber" placeholder="Enter Your Phone Number" required />
+        <input type="text" name="City" placeholder="Enter Your City" required />
+        <input type="text" name="Address" placeholder="Enter Your Address" required>
+        <div class="checkout-buttons">
+            <button type="submit" asp-page-handler="Order">Order</button>
+            <button type="button" onclick="closePopup()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<div class="header">
+    <p>MediTech</p>
+    <a asp-page="Frontend">Continue Shopping</a>
+    <a asp-page="/Index">Log Out</a>
+</div>
+
+<div class="checkout">
+    <form method="post" name="CheckoutForm">
+        <div class="discount">
+            <input type="text" name="DiscountCode" placeholder="Enter Discount Code" />
+            <button type="submit" asp-page-handler="CalculateDiscount">Apply Discount</button>
+        </div>
+a       <p class="@((bool)ViewData["IsDiscounted"] ? "discounted-price" : "")">
+            Total Price: $@ViewData["Price"]
+        </p>
+        <button type="button" onclick="showPopup()" @(Model.CartItems.Any(item => !item.IsAvailable || item.IsOutOfStock) ? "disabled" : "")>Checkout</button>
+    </form>
+</div>
+
+<div id="cartContainer" class="cartContainer">
+    @if (Model.CartItems.Any())
+    {
+        @foreach (var item in Model.CartItems)
+        {
+            <div class="cart-item @(item.IsOutOfStock ? "out-of-stock" : item.IsAvailable ? "" : "not-enough-stock")">
+                <div class="cart-item-pic">
+                    <img src="@item.Product.Image" />
+                </div>
+                <p>@item.Product.Label</p>
+                <p>Price: $@item.Product.Price</p>
+                <p>Quantity: @item.Quantity</p>
+                <form method="post">
+                    <input type="hidden" name="ProductId" value="@item.ProductId" />
+                    <button asp-page-handler="RemoveFromCart" asp-route-productId="@item.ProductId">Remove</button>
+                </form>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="empty-cart-p">Your cart is empty</p>
+    }
+</div>
+
+<script src="/js/Cart.js"></script>
